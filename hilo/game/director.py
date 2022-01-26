@@ -64,13 +64,15 @@ class Director:
         """
         # The current card is displayed.
         if(self.the_card_value == 0):
-            self.the_card.drawn()
-            self.next_card.drawn()
-            print(f"The card is: {self.the_card.value}")
-        else:
-            self.next_card.drawn()
+            card_current = self.the_card.drawn()
+            self.the_card_value = card_current
+            card_next = self.next_card.next_drawn(self.the_card_value)
             print(f"The card is: {self.the_card_value}")
-            self.the_card.value = self.the_card_value
+        else:
+            card_current = self.the_card.drawn()
+            card_next = self.next_card.next_drawn(self.the_card_value)
+            print(f"The card is: {self.the_card_value}")
+            #self.the_card.value = self.the_card_value
         
         # The player is asked, "Higher or lower?" at the beginning of each turn. Plus enhanced input validation.
         # The player guesses if the next one will be higher or lower.
@@ -80,27 +82,26 @@ class Director:
             guess_option = input("Higher or lower? You must enter 'h' or 'l' ").lower()
         
         # The the next card is displayed.
-        print(f"Next card was: {self.next_card.value}")
+        print(f"Next card was: {card_next}")
 
         # The player earns 100 points if they guessed correctly.
         # The player loses 75 points if they guessed incorrectly.
         if(guess_option == "l"):
-            if(self.next_card.value == self.the_card.value):
+            if(card_next == card_current):
                 self.score
-            elif(self.next_card.value < self.the_card.value):
+            elif(card_next < card_current):
                 self.score += 100
             else:
                 self.score -= 75
         elif(guess_option == "h"):
-            if(self.next_card.value == self.the_card.value):
+            if(card_next == card_current):
                 self.score
-            elif(self.next_card.value > self.the_card.value):
+            elif(card_next > card_current):
                 self.score += 100
             else:
                 self.score -= 75
         
-        self.the_card_value = self.next_card.value
-    
+        self.the_card_value = card_next
 
     def do_outputs(self):
         """
