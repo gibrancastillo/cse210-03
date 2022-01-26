@@ -2,9 +2,9 @@ import random
 
 class Deck:
     """
-    An individual card with a different or random number from 1 to 13.
+    A deck that shuffles two cars  individual card with a different or random number from 1 to 13.
 
-    The responsibility of Card is to keep track of the card drawn.
+    The responsibility of a Deck is to shuffle the  card drawn.
    
     Attributes:
         value (int): The number of the card drawn.
@@ -17,7 +17,7 @@ class Deck:
         Args:
             self (Card): An instance of Card.
         """
-        self.drawn
+        self.drawn()
     
 
     def shuffle(self):
