@@ -1,4 +1,4 @@
-from game.card import Card
+from game.deck import Deck
 
 
 class Director:
@@ -25,8 +25,8 @@ class Director:
         # The player starts the game with 300 points.
         self.score = 300
         self.is_playing = True
-        self.the_card = Card()
-        self.next_card = Card()
+        self.the_card = Deck()
+        self.next_card = Deck()
         self.the_card_value = 0
 
 

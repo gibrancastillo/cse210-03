@@ -1,6 +1,6 @@
 import random
 
-class Card:
+class Deck:
     """
     An individual card with a different or random number from 1 to 13.
 
@@ -17,8 +17,14 @@ class Card:
         Args:
             self (Card): An instance of Card.
         """
-        self.value = 0
+        self.drawn
     
+
+    def shuffle(self):
+        self.previous_card = self.drawn()
+        self.current_card = self.drawn()
+
+
     def drawn(self):
         """
         Generates a new random value.
@@ -27,4 +33,4 @@ class Card:
             self (Card): An instance of Card.
         """
         # Individual cards are represented as a number from 1 to 13.
-        self.value = random.randint(1, 13)
+        return random.randint(1, 13)
