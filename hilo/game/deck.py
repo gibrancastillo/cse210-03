@@ -38,6 +38,10 @@ class Deck:
     def next_drawn(self,the_card_value):
         """
         This function takes in the previous card value and generates a new one without considering the previous
+        
+        Args:
+            self for instantiation
+            the_card_value:for exclusion of previously picked card
         """
         card_range = [1,2,3,4,5,6,7,8,9,10,11,12,13]
         for i in card_range:

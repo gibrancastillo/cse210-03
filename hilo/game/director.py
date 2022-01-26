@@ -63,17 +63,24 @@ class Director:
             self (Director): An instance of Director.
         """
         # The current card is displayed.
-        if(self.the_card_value == 0):
-            card_current = self.the_card.drawn()
-            self.the_card_value = card_current
-            card_next = self.next_card.next_drawn(self.the_card_value)
-            print(f"The card is: {self.the_card_value}")
-        else:
-            card_current = self.the_card.drawn()
-            card_next = self.next_card.next_drawn(self.the_card_value)
-            print(f"The card is: {self.the_card_value}")
-            #self.the_card.value = self.the_card_value
+        # if(self.the_card_value == 0):
+        #     card_current = self.the_card.drawn()
+        #     self.the_card_value = card_current
+        #     card_next = self.next_card.next_drawn(self.the_card_value)
+        #     print(f"The card is: {self.the_card_value}")
+        # else:
+        #     card_current = self.the_card.drawn()
+        #     card_next = self.next_card.next_drawn(self.the_card_value)
+        #     print(f"The card is: {self.the_card_value}")
+        #     #self.the_card.value = self.the_card_value
         
+        # The logic above works the same way as the one I put below with less card unless am missing something
+        card_current = self.the_card.drawn()
+        self.the_card_value = card_current
+        card_next = self.next_card.next_drawn(self.the_card_value)
+        print(f"The card is: {self.the_card_value}")
+
+
         # The player is asked, "Higher or lower?" at the beginning of each turn. Plus enhanced input validation.
         # The player guesses if the next one will be higher or lower.
         guess_option = input("Higher or lower? [h/l] ").lower()
