@@ -1,10 +1,11 @@
 import random
 
+
 class Deck:
     """
-    A deck that shuffles two cars  individual card with a different or random number from 1 to 13.
+    A Deck that allows the director to draw a card with a different or random number from 1 to 13.
 
-    The responsibility of a Deck is to shuffle the  card drawn.
+    The responsibility of a Deck is to draw a ranmdom card number from 1 to 13.
    
     Attributes:
         value (int): The number of the card drawn.
@@ -12,26 +13,20 @@ class Deck:
 
     def __init__(self):
         """
-        Constructs a new instance of Card with a value.
+        Constructs a new instance of Deck with a different or random number from 1 to 13.
 
         Args:
-            self (Card): An instance of Card.
+            self (Deck): An instance of Deck.
         """
-        self.previous_card = self.drawn()
-        self.current_card = self.drawn()
-        
+        self.card_value = self.draw()
+
     
-    def shuffle(self):
-        self.previous_card = self.drawn()
-        self.current_card = self.drawn()
-
-
-    def drawn(self):
+    def draw(self):
         """
         Generates a new random value.
         
         Args:
-            self (Card): An instance of Card.
+            self (Deck): An instance of Deck.
         """
         # Individual cards are represented as a number from 1 to 13.
         return random.randint(1, 13)

@@ -10,9 +10,7 @@ class Director:
     Attributes:
         score (int): The score for one round of play.
         is_playing (boolean): Whether or not the game is being played.
-        the_card (Card): An instance of Card.
-        next_card (Card): An instance of Card.
-        the_card_value (int): The next card value for the next round of the game as the card value.
+        deck (Deck): An instance of Deck.
     """
 
     def __init__(self):
@@ -56,12 +54,10 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self.deck.shuffle()
-        prev_card_value = self.deck.previous_card
-        curr_card_value = self.deck.current_card
+        the_card_value = self.deck.draw()
+        next_card_value = self.deck.draw()
 
-        print(f"The card is: {prev_card_value}")
-
+        print(f"The card is: {the_card_value}")
 
         # The player is asked, "Higher or lower?" at the beginning of each turn. Plus enhanced input validation.
         # The player guesses if the next one will be higher or lower.
@@ -71,21 +67,21 @@ class Director:
             guess_option = input("Higher or lower? You must enter 'h' or 'l' ").lower()
         
         # The the next card is displayed.
-        print(f"Next card was: {curr_card_value}")
+        print(f"Next card was: {next_card_value}")
 
         # The player earns 100 points if they guessed correctly.
         # The player loses 75 points if they guessed incorrectly.
         if(guess_option == "l"):
-            if(prev_card_value == curr_card_value):
+            if(the_card_value == next_card_value):
                 self.score
-            elif(curr_card_value < prev_card_value):
+            elif(next_card_value < the_card_value):
                 self.score += 100
             else:
                 self.score -= 75
         elif(guess_option == "h"):
-            if(prev_card_value == curr_card_value):
+            if(the_card_value == next_card_value):
                 self.score
-            elif(curr_card_value > prev_card_value):
+            elif(next_card_value > the_card_value):
                 self.score += 100
             else:
                 self.score -= 75
@@ -93,7 +89,7 @@ class Director:
 
     def do_outputs(self):
         """
-        Displays the score. Also if a player reaches 0 points end the game.
+        Displays the score.
 
         Args:
             self (Director): An instance of Director.
@@ -103,18 +99,19 @@ class Director:
 
     def will_you_keep_playing(self):
         """
-        Ask the user if they want to keep playing the Hilo game.
+        If a player reaches 0 points end the game; otherwise, 
+        ask the user if they want to keep playing the Hilo game.
 
         Args:
             self (Director): An instance of Director.
         """
-        # The player is asked, "Play again?" at the end of each turn. Plus enhanced input validation.
-        # If a player has more than 0 points they decide if they want to keep playing.
         self.is_playing = (self.score > 0)
 
         if not self.is_playing:
             return
 
+        # The player is asked, "Play again?" at the end of each turn. Plus enhanced input validation.
+        # If a player has more than 0 points they decide if they want to keep playing.
         play_again = input("Play again? [y/n] ").lower()
         
         while(play_again not in("y", "n")):
