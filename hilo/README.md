@@ -33,3 +33,8 @@ root                    (project root folder)
 ## Authors
 ---
 * Gibran Castillo (cas21045@byui.edu)
+* Clyve Kokotiko (kok21002@byui.edu)
+* Isiakpona Chuks (juliusrlnd@gmail.com)
+* Patrick Ochen (patrickochen97@gmail.com)
+* Roguin Peña (ro.guin31@gmail.com)
+* Zibanani Nkomo (nko21005@byui.edu)
