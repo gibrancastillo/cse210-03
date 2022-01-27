@@ -17,9 +17,10 @@ class Deck:
         Args:
             self (Card): An instance of Card.
         """
-        self.drawn()
+        self.previous_card = self.drawn()
+        self.current_card = self.drawn()
+        
     
-
     def shuffle(self):
         self.previous_card = self.drawn()
         self.current_card = self.drawn()
@@ -34,19 +35,3 @@ class Deck:
         """
         # Individual cards are represented as a number from 1 to 13.
         return random.randint(1, 13)
-    
-    def next_drawn(self,the_card_value):
-        """
-        This function takes in the previous card value and generates a new one without considering the previous
-        
-        Args:
-            self for instantiation
-            the_card_value:for exclusion of previously picked card
-        """
-        card_range = [1,2,3,4,5,6,7,8,9,10,11,12,13]
-        for i in card_range:
-            if i == the_card_value:
-                card_range.pop(i - 1)
-                break
-        
-        return random.choice(card_range)

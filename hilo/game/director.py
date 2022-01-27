@@ -25,9 +25,7 @@ class Director:
         # The player starts the game with 300 points.
         self.score = 300
         self.is_playing = True
-        self.the_card = Deck()
-        self.next_card = Deck()
-        self.the_card_value = 0
+        self.deck = Deck()
 
 
     def start_game(self):
@@ -44,10 +42,6 @@ class Director:
         while self.is_playing:
             self.guess_hi_or_lo()
             self.do_outputs()
-
-            # If a player reaches 0 points the game is over.
-            if(self.score <= 0): break
-
             self.will_you_keep_playing()
         
         print("++++++++++++++++++++++++++++++++++++")
@@ -62,23 +56,11 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        # The current card is displayed.
-        # if(self.the_card_value == 0):
-        #     card_current = self.the_card.drawn()
-        #     self.the_card_value = card_current
-        #     card_next = self.next_card.next_drawn(self.the_card_value)
-        #     print(f"The card is: {self.the_card_value}")
-        # else:
-        #     card_current = self.the_card.drawn()
-        #     card_next = self.next_card.next_drawn(self.the_card_value)
-        #     print(f"The card is: {self.the_card_value}")
-        #     #self.the_card.value = self.the_card_value
-        
-        # The logic above works the same way as the one I put below with less card unless am missing something
-        card_current = self.the_card.drawn()
-        self.the_card_value = card_current
-        card_next = self.next_card.next_drawn(self.the_card_value)
-        print(f"The card is: {self.the_card_value}")
+        self.deck.shuffle()
+        prev_card_value = self.deck.previous_card
+        curr_card_value = self.deck.current_card
+
+        print(f"The card is: {prev_card_value}")
 
 
         # The player is asked, "Higher or lower?" at the beginning of each turn. Plus enhanced input validation.
@@ -89,26 +71,25 @@ class Director:
             guess_option = input("Higher or lower? You must enter 'h' or 'l' ").lower()
         
         # The the next card is displayed.
-        print(f"Next card was: {card_next}")
+        print(f"Next card was: {curr_card_value}")
 
         # The player earns 100 points if they guessed correctly.
         # The player loses 75 points if they guessed incorrectly.
         if(guess_option == "l"):
-            if(card_next == card_current):
+            if(prev_card_value == curr_card_value):
                 self.score
-            elif(card_next < card_current):
+            elif(curr_card_value < prev_card_value):
                 self.score += 100
             else:
                 self.score -= 75
         elif(guess_option == "h"):
-            if(card_next == card_current):
+            if(prev_card_value == curr_card_value):
                 self.score
-            elif(card_next > card_current):
+            elif(curr_card_value > prev_card_value):
                 self.score += 100
             else:
                 self.score -= 75
-        
-        self.the_card_value = card_next
+
 
     def do_outputs(self):
         """
@@ -129,6 +110,11 @@ class Director:
         """
         # The player is asked, "Play again?" at the end of each turn. Plus enhanced input validation.
         # If a player has more than 0 points they decide if they want to keep playing.
+        self.is_playing = (self.score > 0)
+
+        if not self.is_playing:
+            return
+
         play_again = input("Play again? [y/n] ").lower()
         
         while(play_again not in("y", "n")):
