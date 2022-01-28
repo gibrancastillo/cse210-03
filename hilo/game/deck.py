@@ -8,7 +8,8 @@ class Deck:
     The responsibility of a Deck is to draw a ranmdom card number from 1 to 13.
    
     Attributes:
-        value (int): The number of the card drawn.
+        card_a (int): The first or previous card number of the card drawn.
+        card_b (int): The second or current card number of the card drawn.
     """
 
     def __init__(self):
@@ -18,15 +19,25 @@ class Deck:
         Args:
             self (Deck): An instance of Deck.
         """
-        self.card_value = self.draw()
+        self.card_a = self.next_draw(0)
+        self.card_b = self.next_draw(self.card_a)
 
     
-    def draw(self):
+    def draw(self, card_a):
         """
-        Generates a new random value.
+        Generates a new random value and takes in the previous card 
+        value and generates a new one without considering the previous
         
         Args:
-            self (Deck): An instance of Deck.
+            self for instantiation
+            card_a (int): The previously card number picked to be excluded from the deck
         """
-        # Individual cards are represented as a number from 1 to 13.
-        return random.randint(1, 13)
+        card_range = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+        
+        if card_a > 0:
+            for i in card_range:
+                if i == card_a:
+                    card_range.pop(i - 1)
+                    break
+        
+        return random.choice(card_range)

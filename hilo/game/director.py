@@ -54,8 +54,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        the_card_value = self.deck.draw()
-        next_card_value = self.deck.draw()
+        the_card_value = self.deck.card_a
+        next_card_value = self.deck.card_b
 
         print(f"The card is: {the_card_value}")
 
@@ -72,19 +72,21 @@ class Director:
         # The player earns 100 points if they guessed correctly.
         # The player loses 75 points if they guessed incorrectly.
         if(guess_option == "l"):
-            if(the_card_value == next_card_value):
-                self.score
-            elif(next_card_value < the_card_value):
+            if(next_card_value < the_card_value):
                 self.score += 100
             else:
                 self.score -= 75
         elif(guess_option == "h"):
-            if(the_card_value == next_card_value):
-                self.score
-            elif(next_card_value > the_card_value):
+            if(next_card_value > the_card_value):
                 self.score += 100
             else:
                 self.score -= 75
+        
+        # move card value B to card value A
+        self.deck.card_a = self.deck.card_b
+
+        # picks a new random number for value B and ensures that it isn't the same number as A
+        self.deck.card_b = self.deck.draw(self.deck.card_a)
 
 
     def do_outputs(self):
