@@ -36,7 +36,8 @@ class Director:
         # Enhanced game play and game over messages.
         print("\n ------- Have fun playing the 'Hilo Game' -------\n")
         print("++++++++++++++++++++++++++++++++++++")
-        
+
+        #This while loop will control the game.
         while self.is_playing:
             self.guess_hi_or_lo()
             self.do_outputs()
@@ -62,7 +63,8 @@ class Director:
         # The player is asked, "Higher or lower?" at the beginning of each turn. Plus enhanced input validation.
         # The player guesses if the next one will be higher or lower.
         guess_option = input("Higher or lower? [h/l] ").lower()
-        
+
+        #This while loop will make sure that the user enters the right letter either h or l.
         while(guess_option not in("h", "l")):
             guess_option = input("Higher or lower? You must enter 'h' or 'l' ").lower()
         
@@ -116,6 +118,7 @@ class Director:
         # If a player has more than 0 points they decide if they want to keep playing.
         play_again = input("Play again? [y/n] ").lower()
         
+        #This while loop will make sure that the user enters the right letter either y or n.
         while(play_again not in("y", "n")):
             play_again = input("Play again? You must enter 'y' or 'n' ").lower()
         
