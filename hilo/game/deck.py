@@ -19,8 +19,8 @@ class Deck:
         Args:
             self (Deck): An instance of Deck.
         """
-        self.card_a = self.next_draw(0)
-        self.card_b = self.next_draw(self.card_a)
+        self.card_a = self.draw(0)
+        self.card_b = self.draw(self.card_a)
 
     
     def draw(self, card_a):
