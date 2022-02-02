@@ -116,6 +116,7 @@ class Director:
 
         # The player is asked, "Play again?" at the end of each turn. Plus enhanced input validation.
         # If a player has more than 0 points they decide if they want to keep playing.
+        # Provision for the input validation was also focus .lower() whether the user types an N or n.
         play_again = input("Play again? [y/n] ").lower()
         
         #This while loop will make sure that the user enters the right letter either y or n.
